@@ -8,10 +8,14 @@ DEFINES += \
     QT_NO_CAST_TO_ASCII \
 
 SOURCES += \
-    main.cpp
+    main.cpp \
+    Frontend.cpp
 
 RESOURCES += ui.qrc
 
 
 unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+HEADERS += \
+    Frontend.h

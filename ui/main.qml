@@ -25,30 +25,6 @@ Window {
         anchors.left: grid.left
     }
 
-    ListModel {
-        id: frontendModel
-        ListElement {
-            name: "EmulationStation"
-            desc: "Frontend used by RetroPie for launching emulators (default)"
-            logo: "es.png"
-        }
-        ListElement {
-            name: "AttractMode"
-            desc: "Attract-Mode is a graphical frontend for command line emulators such as MAME, MESS and Nestopia."
-            logo: "attract.png"
-        }
-        ListElement {
-            name: "mehstation"
-            desc: "Open-source frontend launcher for your retrobox."
-            logo: "meh.png"
-        }
-        ListElement {
-            name: "Pegasus"
-            desc: "A graphical frontend for browsing your game library and launching all kinds of emulators from the same place."
-            logo: "pegasus.png"
-        }
-    }
-
     GridView {
         id: grid
 
