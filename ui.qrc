@@ -6,5 +6,7 @@
         <file>ui/logo/es.png</file>
         <file>ui/logo/meh.png</file>
         <file>ui/logo/pegasus.png</file>
+        <file>ui/FrontendDelegate.qml</file>
+        <file>ui/Title.qml</file>
     </qresource>
 </RCC>
