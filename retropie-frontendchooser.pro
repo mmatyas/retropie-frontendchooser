@@ -9,7 +9,8 @@ DEFINES += \
 
 SOURCES += \
     main.cpp \
-    Frontend.cpp
+    Frontend.cpp \
+    Installer.cpp
 
 RESOURCES += ui.qrc
 
@@ -18,4 +19,5 @@ unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    Frontend.h
+    Frontend.h \
+    Installer.h

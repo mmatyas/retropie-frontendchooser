@@ -1,4 +1,5 @@
 #include "Frontend.h"
+#include "Installer.h"
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
@@ -6,14 +7,10 @@
 #include <QVector>
 
 
-int main(int argc, char *argv[])
+namespace {
+QList<QObject*> create_model()
 {
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
-    QGuiApplication app(argc, argv);
-
-
-    QList<QObject*> frontendModel {
+    return {
         new Frontend(
             QStringLiteral("EmulationStation"),
             QStringLiteral("Frontend used by RetroPie for launching emulators (default)."),
@@ -39,10 +36,24 @@ int main(int argc, char *argv[])
             QStringLiteral("pegasus-fe")
         ),
     };
+}
+
+} // namespace
+
+
+int main(int argc, char *argv[])
+{
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
+    QGuiApplication app(argc, argv);
+
+    const QList<QObject*> frontendModel(create_model());
+    Installer installer;
 
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty(QStringLiteral("frontendModel"), QVariant::fromValue(frontendModel));
+    engine.rootContext()->setContextProperty(QStringLiteral("installer"), &installer);
     engine.load(QUrl(QStringLiteral("qrc:/ui/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

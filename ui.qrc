@@ -8,5 +8,6 @@
         <file>ui/logo/pegasus.png</file>
         <file>ui/FrontendDelegate.qml</file>
         <file>ui/Title.qml</file>
+        <file>ui/RetropieMissing.qml</file>
     </qresource>
 </RCC>

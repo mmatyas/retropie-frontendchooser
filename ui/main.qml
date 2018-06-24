@@ -16,6 +16,8 @@ Window {
 
     readonly property int windowMargin: vpx(30)
 
+    Component.onCompleted: if (!installer.retropieAvailable) retropieMissing.focus = true
+
 
     Title {
         id: mainTitle
@@ -74,5 +76,12 @@ Window {
             text: "Quit"
             height: vpx(50)
         }
+    }
+
+    RetropieMissing {
+        id: retropieMissing
+        visible: !installer.retropieAvailable
+
+        onAccepted: close()
     }
 }
