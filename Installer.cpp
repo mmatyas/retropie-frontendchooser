@@ -14,3 +14,9 @@ bool Installer::retropieAvailable() const
     const QFileInfo pkgman(m_pkgman_path);
     return pkgman.exists() && pkgman.isFile() && pkgman.isExecutable();
 }
+
+bool Installer::installed(const QString& package)
+{
+    const QFileInfo file(QStringLiteral("/opt/retropie/supplementary/") + package);
+    return file.exists() && file.isDir();
+}

@@ -9,51 +9,41 @@ Rectangle {
 
     Keys.onReturnPressed: accepted()
 
+    property int boxPadding: vpx(30)
+    property int buttonTextSize: vpx(18)
+    property int buttonHeight: vpx(50)
+    property color buttonBlue: "#18e"
+    property color buttonWhite: "#eee"
+
 
     Rectangle {
-        width: vpx(700)
-        height: vpx(300)
-        radius: vpx(10)
+        width: vpx(550)
+        height: descText.height + boxPadding * 2 + buttonHeight
         anchors.centerIn: parent
 
         Text {
-            id: errorLabel
-            text: "Error"
-            color: "#e11"
-            font {
-                bold: true
-                pixelSize: vpx(30)
-                capitalization: Font.AllUppercase
-            }
-            anchors.top: parent.top; anchors.topMargin: vpx(30);
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-
-        Text {
-            text: "This program is for RetroPie, but RetroPie doesn't seem to be installed. The program will now close."
-            color: "#112"
+            id: descText
+            text: "ERROR: This program is for RetroPie, but RetroPie doesn't seem to be installed. The program will now close."
+            color: "#111"
             font.pixelSize: vpx(20)
             wrapMode: Text.Wrap
-            width: parent.width - vpx(40)
+            width: parent.width - boxPadding * 2
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: errorLabel.bottom; anchors.topMargin: vpx(15)
+            anchors.top: parent.top; anchors.topMargin: boxPadding
             horizontalAlignment: Text.AlignHCenter
         }
 
         Rectangle {
             id: button
-            width: parent.width * 0.6
-            height: vpx(40)
-            color: "#38c"
-            radius: vpx(5)
-            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width
+            height: buttonHeight
+            color: buttonBlue
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: errorLabel.anchors.topMargin
 
             Text {
-                text: "OK"
-                color: "#eee"
-                font.pixelSize: vpx(18)
+                text: "Ok"
+                color: buttonWhite
+                font.pixelSize: buttonTextSize
                 font.bold: true
                 anchors.centerIn: parent
             }

@@ -42,10 +42,21 @@ Window {
         delegate: FrontendDelegate {
             width: grid.cellWidth
             height: grid.cellHeight
+
             selected: GridView.isCurrentItem && grid.focus
             itemName: model.name
             itemDesc: model.desc
             itemLogo: "qrc:/ui/logo/" + model.logo
+
+            Keys.onReturnPressed: {
+                if (!installer.installed(model.packageName)) {
+                    installQuestion.frontendName = itemName;
+                    installQuestion.frontendPackage = model.packageName;
+                    installQuestion.focus = true;
+                    return;
+                }
+                // installer.setAsDefault(model.packageName);
+            }
         }
 
         cellWidth: width / 2
@@ -78,10 +89,19 @@ Window {
         }
     }
 
+    InstallQuestion {
+        id: installQuestion
+
+        property string frontendPackage
+
+        visible: focus
+        onCancel: grid.focus = true
+        onAccept: console.log("acc")
+    }
+
     RetropieMissing {
         id: retropieMissing
-        visible: !installer.retropieAvailable
-
+        visible: focus
         onAccepted: close()
     }
 }

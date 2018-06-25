@@ -9,5 +9,6 @@
         <file>ui/FrontendDelegate.qml</file>
         <file>ui/Title.qml</file>
         <file>ui/RetropieMissing.qml</file>
+        <file>ui/InstallQuestion.qml</file>
     </qresource>
 </RCC>

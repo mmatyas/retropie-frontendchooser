@@ -13,6 +13,8 @@ public:
 
     bool retropieAvailable() const;
 
+    Q_INVOKABLE bool installed(const QString& packageName);
+
 private:
     const QString m_pkgman_path;
 };
