@@ -5,7 +5,7 @@ Rectangle {
     signal accepted
 
     anchors.fill: parent
-    color: "#80000000"
+    color: "#8f000000"
 
     Keys.onReturnPressed: accepted()
 

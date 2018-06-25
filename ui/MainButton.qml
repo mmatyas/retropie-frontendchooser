@@ -4,6 +4,8 @@ import QtQuick 2.0
 Rectangle {
     property alias text: label.text
 
+    signal pressed
+
     implicitWidth: parent.width
     implicitHeight: vpx(100)
     color: focus ? "#569" : "#335"
@@ -11,6 +13,9 @@ Rectangle {
 
     border.color: "#446"
     border.width: vpx(2)
+
+    Keys.onEnterPressed: pressed()
+    Keys.onReturnPressed: pressed()
 
     Text {
         id: label

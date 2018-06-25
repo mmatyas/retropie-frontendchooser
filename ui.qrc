@@ -10,5 +10,6 @@
         <file>ui/Title.qml</file>
         <file>ui/RetropieMissing.qml</file>
         <file>ui/InstallQuestion.qml</file>
+        <file>ui/InstallLog.qml</file>
     </qresource>
 </RCC>

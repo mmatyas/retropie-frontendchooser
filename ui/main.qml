@@ -48,7 +48,7 @@ Window {
             itemDesc: model.desc
             itemLogo: "qrc:/ui/logo/" + model.logo
 
-            Keys.onReturnPressed: {
+            function enter() {
                 if (!installer.installed(model.packageName)) {
                     installQuestion.frontendName = itemName;
                     installQuestion.frontendPackage = model.packageName;
@@ -57,6 +57,9 @@ Window {
                 }
                 // installer.setAsDefault(model.packageName);
             }
+
+            Keys.onReturnPressed: enter()
+            Keys.onEnterPressed: enter()
         }
 
         cellWidth: width / 2
@@ -86,6 +89,8 @@ Window {
             id: quitButton
             text: "Quit"
             height: vpx(50)
+
+            onPressed: close()
         }
     }
 
@@ -96,7 +101,19 @@ Window {
 
         visible: focus
         onCancel: grid.focus = true
-        onAccept: console.log("acc")
+        onAccept: {
+            installer.startInstall(frontendPackage);
+            installLog.focus = true;
+        }
+    }
+
+    InstallLog {
+        id: installLog
+        visible: focus
+
+        logText: installer.log
+        taskRunning: installer.taskRunning
+        onClose: grid.focus = true
     }
 
     RetropieMissing {

@@ -44,12 +44,10 @@ QList<QObject*> create_model()
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
     QGuiApplication app(argc, argv);
 
     const QList<QObject*> frontendModel(create_model());
     Installer installer;
-
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty(QStringLiteral("frontendModel"), QVariant::fromValue(frontendModel));
