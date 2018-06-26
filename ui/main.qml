@@ -49,9 +49,8 @@ Window {
             itemLogo: "qrc:/ui/logo/" + model.logo
 
             function enter() {
-                if (!installer.installed(model.packageName)) {
-                    installQuestion.frontendName = itemName;
-                    installQuestion.frontendPackage = model.packageName;
+                if (!installer.installed(model.modelData)) {
+                    installQuestion.frontend = model.modelData;
                     installQuestion.focus = true;
                     return;
                 }
@@ -97,12 +96,10 @@ Window {
     InstallQuestion {
         id: installQuestion
 
-        property string frontendPackage
-
         visible: focus
         onCancel: grid.focus = true
         onAccept: {
-            installer.startInstall(frontendPackage);
+            installer.startInstall(frontend);
             installLog.focus = true;
         }
     }

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Frontend.h"
+
 #include <QObject>
 #include <QProcess>
 
@@ -14,8 +16,8 @@ class Installer : public QObject {
 public:
     explicit Installer(QObject* parent = nullptr);
 
-    Q_INVOKABLE bool installed(const QString& packageName) const;
-    Q_INVOKABLE void startInstall(const QString& packageName);
+    Q_INVOKABLE bool installed(Frontend* frontend) const;
+    Q_INVOKABLE void startInstall(Frontend* frontend);
 
     bool retropieAvailable() const;
     bool taskRunning() const { return m_task_running; }

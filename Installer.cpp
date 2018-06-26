@@ -23,18 +23,19 @@ bool Installer::retropieAvailable() const
     return pkgman.exists() && pkgman.isFile() && pkgman.isExecutable();
 }
 
-bool Installer::installed(const QString& package) const
+bool Installer::installed(Frontend* frontend) const
 {
-    const QFileInfo file(QStringLiteral("/opt/retropie/supplementary/") + package);
-    return file.exists() && file.isDir();
+    Q_ASSERT(frontend);
+    return QFileInfo::exists(frontend->m_exe_path);
 }
 
-void Installer::startInstall(const QString& package)
+void Installer::startInstall(Frontend* frontend)
 {
+    Q_ASSERT(frontend);
     Q_ASSERT(m_process.state() != QProcess::Running);
 
     const QStringList arguments {
-        package,
+        frontend->m_package_name,
         QStringLiteral("install")
     };
 

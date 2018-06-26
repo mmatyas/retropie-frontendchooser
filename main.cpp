@@ -15,25 +15,29 @@ QList<QObject*> create_model()
             QStringLiteral("EmulationStation"),
             QStringLiteral("Frontend used by RetroPie for launching emulators (default)."),
             QStringLiteral("es.png"),
-            QStringLiteral("emulationstation")
+            QStringLiteral("emulationstation"),
+            QStringLiteral("/usr/bin/emulationstation")
         ),
         new Frontend(
             QStringLiteral("AttractMode"),
             QStringLiteral("Attract-Mode is a graphical frontend for command line emulators such as MAME, MESS and Nestopia."),
             QStringLiteral("attract.png"),
-            QStringLiteral("attractmode")
+            QStringLiteral("attractmode"),
+            QStringLiteral("/usr/bin/attract")
         ),
         new Frontend(
             QStringLiteral("mehstation"),
             QStringLiteral("Open-source frontend launcher for your retrobox."),
             QStringLiteral("meh.png"),
-            QStringLiteral("mehstation")
+            QStringLiteral("mehstation"),
+            QStringLiteral("/usr/bin/mehstation")
         ),
         new Frontend(
             QStringLiteral("Pegasus"),
             QStringLiteral("A graphical frontend for browsing your game library and launching all kinds of emulators from the same place."),
             QStringLiteral("pegasus.png"),
-            QStringLiteral("pegasus-fe")
+            QStringLiteral("pegasus-fe"),
+            QStringLiteral("/opt/retropie/supplementary/pegasus-fe/pegasus-fe")
         ),
     };
 }

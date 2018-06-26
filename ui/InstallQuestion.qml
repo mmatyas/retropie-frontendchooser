@@ -4,13 +4,14 @@ import QtQuick 2.0
 FocusScope {
     id: root
 
-    property string frontendName
+    property var frontend: undefined
 
     signal accept
     signal cancel
 
     anchors.fill: parent
     Keys.onEscapePressed: cancel()
+    onFocusChanged: if (focus) buttonCancel.focus = true;
 
     property int boxPadding: vpx(30)
     property int buttonTextSize: vpx(18)
@@ -31,7 +32,8 @@ FocusScope {
 
         Text {
             id: descText
-            text: "The selected frontend (%1) is not yet installed. Would you like to install it now?".arg(frontendName)
+            text: "The selected frontend (%1) is not yet installed. Would you like to install it now?"
+                .arg(frontend ? frontend.name : "")
             color: "#111"
             font.pixelSize: vpx(20)
             wrapMode: Text.Wrap
