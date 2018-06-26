@@ -8,7 +8,8 @@ class Installer : public QObject {
     Q_OBJECT
     Q_PROPERTY(bool retropieAvailable READ retropieAvailable CONSTANT)
     Q_PROPERTY(QString log READ log NOTIFY logChanged)
-    Q_PROPERTY(bool taskRunning READ taskRunning NOTIFY taskStateChanged)
+    Q_PROPERTY(bool taskRunning READ taskRunning NOTIFY taskRunChanged)
+    Q_PROPERTY(bool taskFailed READ taskFailed NOTIFY taskFailChanged)
 
 public:
     explicit Installer(QObject* parent = nullptr);
@@ -18,11 +19,13 @@ public:
 
     bool retropieAvailable() const;
     bool taskRunning() const { return m_task_running; }
+    bool taskFailed() const { return m_task_failed; }
     QString log() const { return m_log; }
 
 signals:
     void logChanged();
-    void taskStateChanged();
+    void taskRunChanged();
+    void taskFailChanged();
 
 private slots:
     void onProcessReadyRead();
@@ -34,4 +37,5 @@ private:
     QString m_log;
     QProcess m_process;
     bool m_task_running;
+    bool m_task_failed;
 };

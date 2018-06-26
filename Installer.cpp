@@ -7,9 +7,10 @@ Installer::Installer(QObject* parent)
     : QObject(parent)
     , m_pkgman_path(QStringLiteral("/home/pi/RetroPie-Setup/retropie_packages.sh"))
     , m_task_running(false)
+    , m_task_failed(false)
 {
     m_process.setProcessChannelMode(QProcess::MergedChannels);
-    m_process.setWorkingDirectory(QStringLiteral("/home/pi"));
+    // m_process.setWorkingDirectory(QStringLiteral("/home/pi"));
     connect(&m_process, &QProcess::readyRead, this, &Installer::onProcessReadyRead);
     connect(&m_process, &QProcess::errorOccurred, this, &Installer::onProcessError);
     connect(&m_process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
@@ -44,7 +45,9 @@ void Installer::startInstall(const QString& package)
     emit logChanged();
 
     m_task_running = true;
-    emit taskStateChanged();
+    m_task_failed = false;
+    emit taskRunChanged();
+    emit taskFailChanged();
 
     m_process.start(m_pkgman_path, arguments, QIODevice::ReadOnly);
 }
@@ -68,11 +71,15 @@ void Installer::onProcessError(QProcess::ProcessError)
     emit logChanged();
 
     m_task_running = false;
-    emit taskStateChanged();
+    m_task_failed = true;
+    emit taskRunChanged();
+    emit taskFailChanged();
 }
 
 void Installer::onProcessFinished(int, QProcess::ExitStatus)
 {
     m_task_running = false;
-    emit taskStateChanged();
+    m_task_failed = false;
+    emit taskRunChanged();
+    emit taskFailChanged();
 }

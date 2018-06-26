@@ -110,9 +110,6 @@ Window {
     InstallLog {
         id: installLog
         visible: focus
-
-        logText: installer.log
-        taskRunning: installer.taskRunning
         onClose: grid.focus = true
     }
 

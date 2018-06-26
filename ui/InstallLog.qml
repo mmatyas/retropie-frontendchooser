@@ -1,14 +1,15 @@
 import QtQuick 2.0
 
 FocusScope {
-    property bool taskRunning
-    property alias logText: log.text
+    property bool taskRunning: installer.taskRunning
+    property bool taskFailed: installer.taskFailed
+    property string logText: installer.log
+    property int boxPadding: vpx(20)
 
     signal close
 
     anchors.fill: parent
 
-    property int boxPadding: vpx(20)
 
     Rectangle {
         anchors.fill: parent
@@ -53,6 +54,7 @@ FocusScope {
 
                 Text {
                     id: log
+                    text: logText
                     width: parent.width
                     color: "#cce"
                     font.pixelSize: vpx(14)
@@ -87,6 +89,18 @@ FocusScope {
                 font.pixelSize: vpx(18)
                 color: taskRunning ? "#778" : "#eee"
             }
+        }
+
+        Text {
+            text: "The installation has failed -- check the log for more details."
+            color: "#e11"
+            font.bold: true
+            font.pixelSize: vpx(18)
+
+            visible: taskFailed
+
+            anchors.left: parent.left; anchors.leftMargin: boxPadding
+            anchors.verticalCenter: button.verticalCenter
         }
     }
 }
