@@ -26,7 +26,12 @@ bool Installer::retropieAvailable() const
 bool Installer::installed(Frontend* frontend) const
 {
     Q_ASSERT(frontend);
-    return QFileInfo::exists(frontend->m_exe_path);
+
+    const QString path = frontend->m_exe_path.startsWith('/')
+        ? frontend->m_exe_path
+        : QStringLiteral("/usr/bin/") + frontend->m_exe_path;
+
+    return QFileInfo::exists(path);
 }
 
 void Installer::startInstall(Frontend* frontend)

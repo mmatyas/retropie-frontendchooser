@@ -20,6 +20,7 @@ public:
     Q_INVOKABLE void startInstall(Frontend* frontend);
 
     bool retropieAvailable() const;
+
     bool taskRunning() const { return m_task_running; }
     bool taskFailed() const { return m_task_failed; }
     QString log() const { return m_log; }

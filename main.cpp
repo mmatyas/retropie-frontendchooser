@@ -1,3 +1,4 @@
+#include "AutorunFile.h"
 #include "Frontend.h"
 #include "Installer.h"
 
@@ -16,21 +17,21 @@ QList<QObject*> create_model()
             QStringLiteral("Frontend used by RetroPie for launching emulators (default)."),
             QStringLiteral("es.png"),
             QStringLiteral("emulationstation"),
-            QStringLiteral("/usr/bin/emulationstation")
+            QStringLiteral("emulationstation")
         ),
         new Frontend(
             QStringLiteral("AttractMode"),
             QStringLiteral("Attract-Mode is a graphical frontend for command line emulators such as MAME, MESS and Nestopia."),
             QStringLiteral("attract.png"),
             QStringLiteral("attractmode"),
-            QStringLiteral("/usr/bin/attract")
+            QStringLiteral("attract")
         ),
         new Frontend(
             QStringLiteral("mehstation"),
             QStringLiteral("Open-source frontend launcher for your retrobox."),
             QStringLiteral("meh.png"),
             QStringLiteral("mehstation"),
-            QStringLiteral("/usr/bin/mehstation")
+            QStringLiteral("mehstation")
         ),
         new Frontend(
             QStringLiteral("Pegasus"),
@@ -52,10 +53,12 @@ int main(int argc, char *argv[])
 
     const QList<QObject*> frontendModel(create_model());
     Installer installer;
+    AutorunFile autorun;
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty(QStringLiteral("frontendModel"), QVariant::fromValue(frontendModel));
     engine.rootContext()->setContextProperty(QStringLiteral("installer"), &installer);
+    engine.rootContext()->setContextProperty(QStringLiteral("autorun"), &autorun);
     engine.load(QUrl(QStringLiteral("qrc:/ui/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

@@ -3,16 +3,25 @@ import QtQuick 2.0
 
 Item {
     property bool selected
+    property bool autostarting
     property alias itemName: name.text
     property alias itemDesc: desc.text
     property alias itemLogo: logo.source
 
     Rectangle {
+        property int borderWidth: autostarting ? vpx(6) : 0
+
         width: parent.width - vpx(10)
         height: parent.height - vpx(10)
         anchors.centerIn: parent
         color: selected ? "#579" : "#556"
-        border.color: "#112"
+        border.color: "#6ce"
+        border.width: borderWidth
+
+        Behavior on borderWidth {
+            NumberAnimation { duration: 300 }
+        }
+
 
         Image {
             id: logo

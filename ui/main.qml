@@ -16,7 +16,10 @@ Window {
 
     readonly property int windowMargin: vpx(30)
 
-    Component.onCompleted: if (!installer.retropieAvailable) retropieMissing.focus = true
+    Component.onCompleted: {
+        if (!installer.retropieAvailable)
+            retropieMissing.focus = true;
+    }
 
 
     Title {
@@ -47,14 +50,22 @@ Window {
             itemName: model.name
             itemDesc: model.desc
             itemLogo: "qrc:/ui/logo/" + model.logo
+            autostarting: autorun.isAutostarting(model.modelData)
+
+            Connections {
+                target: autorun
+                onSettingsChanged: autostarting = autorun.isAutostarting(model.modelData)
+            }
 
             function enter() {
-                if (!installer.installed(model.modelData)) {
+                if (installer.installed(model.modelData)) {
+                    if (!autorun.setAsDefault(model.modelData))
+                        autorunSetDefaultFailed.focus = true;
+                }
+                else {
                     installQuestion.frontend = model.modelData;
                     installQuestion.focus = true;
-                    return;
                 }
-                // installer.setAsDefault(model.packageName);
             }
 
             Keys.onReturnPressed: enter()
