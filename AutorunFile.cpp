@@ -31,13 +31,12 @@ QStringList find_autostarting_exes(const QString& file_path)
     return found_exes;
 }
 
-QStringList read_regular_lines(const QString& file_path)
+QStringList read_all_lines(const QString& file_path)
 {
     QStringList lines;
     process_lines(file_path,
         [&lines](const QString& line){
-            if (!line.contains(QStringLiteral("#auto")))
-                lines.append(line);
+            lines.append(line);
         });
     return lines;
 }
@@ -57,15 +56,22 @@ bool AutorunFile::isAutostarting(Frontend* frontend) const
 
 bool AutorunFile::setAsDefault(Frontend* frontend)
 {
-    QStringList lines = read_regular_lines(m_file_path);
+    const QStringList lines = read_all_lines(m_file_path);
 
     QFile file(m_file_path);
     if (!file.open(QIODevice::WriteOnly))
         return false;
 
     QTextStream stream(&file);
-    for (const QString& line : qAsConst(lines))
-        stream << line;
+    for (const QString& line : lines) {
+        if (!line.contains(QStringLiteral("#auto")))
+            stream << line;
+    }
+
+    const QString KODI_START(QStringLiteral("kodi #auto"));
+    if (lines.contains(KODI_START))
+        stream << KODI_START << "\n";
+
     stream << frontend->m_exe_path << " #auto\n";
 
     m_autostarting_exes = QStringList { frontend->m_exe_path };
