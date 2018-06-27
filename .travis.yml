@@ -34,3 +34,12 @@ script:
       make install INSTALL_ROOT=$PWD/../install_${target} &&
       cd ..;
     done
+
+after_success:
+  - mkdir dist && cd dist
+  - for target in ${TARGETS}; do
+      zip -j retropie-frontendchooser_${target}.zip
+        ../install_${target}/opt/retropie-frontendchooser/bin/retropie-frontendchooser;
+    done
+  - wget https://github.com/mmatyas/uploadtool/raw/master/upload.sh
+  - bash ./upload.sh $(find ./ -name "*.zip")
