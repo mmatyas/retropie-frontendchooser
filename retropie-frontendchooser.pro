@@ -11,12 +11,14 @@ SOURCES += \
     main.cpp \
     Frontend.cpp \
     Installer.cpp \
-    AutorunFile.cpp
+    AutorunFile.cpp \
+    System.cpp
 
 HEADERS += \
     Frontend.h \
     Installer.h \
-    AutorunFile.h
+    AutorunFile.h \
+    System.h
 
 RESOURCES += ui.qrc
 

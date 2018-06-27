@@ -1,6 +1,7 @@
 #include "AutorunFile.h"
 #include "Frontend.h"
 #include "Installer.h"
+#include "System.h"
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
@@ -54,11 +55,13 @@ int main(int argc, char *argv[])
     const QList<QObject*> frontendModel(create_model());
     Installer installer;
     AutorunFile autorun;
+    System system;
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty(QStringLiteral("frontendModel"), QVariant::fromValue(frontendModel));
     engine.rootContext()->setContextProperty(QStringLiteral("installer"), &installer);
     engine.rootContext()->setContextProperty(QStringLiteral("autorun"), &autorun);
+    engine.rootContext()->setContextProperty(QStringLiteral("system"), &system);
     engine.load(QUrl(QStringLiteral("qrc:/ui/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

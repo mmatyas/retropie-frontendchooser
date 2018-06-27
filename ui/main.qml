@@ -108,6 +108,7 @@ Window {
             text: "Reboot device"
             height: vpx(80)
 
+            onPressed: rebootQuestion.focus = true
             KeyNavigation.down: quitButton
         }
         MainButton {
@@ -139,6 +140,15 @@ Window {
         id: installLog
         visible: focus
         onClose: grid.focus = true
+    }
+
+    Question {
+        id: rebootQuestion
+
+        text: "The system will reboot. Are you sure?\nThis may require admin rights."
+
+        onCancel: rebootButton.focus = true
+        onAccept: system.reboot()
     }
 
     Message {
