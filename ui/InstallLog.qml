@@ -10,6 +10,10 @@ FocusScope {
 
     anchors.fill: parent
 
+    visible: opacity > 0.1
+    opacity: focus ? 1 : 0
+    Behavior on opacity { NumberAnimation { duration: 150 } }
+
 
     Rectangle {
         anchors.fill: parent

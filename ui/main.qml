@@ -125,10 +125,9 @@ Window {
 
         property var frontend: undefined
 
-        text: "The selected frontend (%1) is not yet installed. Would you like to install it now? Note that this may require admin (`sudo`) rights."
+        text: "The selected frontend (%1) is not yet installed. Would you like to install it now?\nThis may require admin (`sudo`) rights."
             .arg(frontend ? frontend.name : "")
 
-        visible: focus
         onCancel: grid.focus = true
         onAccept: {
             installer.startInstall(frontend);
@@ -138,7 +137,6 @@ Window {
 
     InstallLog {
         id: installLog
-        visible: focus
         onClose: grid.focus = true
     }
 
@@ -154,14 +152,12 @@ Window {
     Message {
         id: autorunSetDefaultFailed
         text: "ERROR: Could not change the autoruns file. Perhaps it's write-protected?"
-        visible: focus
         onAccepted: grid.focus = true
     }
 
     Message {
         id: retropieMissing
         text: "ERROR: This program is for RetroPie, but RetroPie doesn't seem to be installed. The program will now close."
-        visible: focus
         onAccepted: close()
     }
 }

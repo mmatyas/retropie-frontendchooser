@@ -8,6 +8,10 @@ Rectangle {
     anchors.fill: parent
     color: "#8f000000"
 
+    visible: opacity > 0.1
+    opacity: focus ? 1 : 0
+    Behavior on opacity { NumberAnimation { duration: 100 } }
+
     Keys.onReturnPressed: accepted()
 
     property int boxPadding: vpx(30)

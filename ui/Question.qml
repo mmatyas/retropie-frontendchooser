@@ -13,11 +13,15 @@ FocusScope {
     Keys.onEscapePressed: cancel()
     onFocusChanged: if (focus) buttonCancel.focus = true;
 
+    visible: opacity > 0.1
+    opacity: focus ? 1 : 0
+    Behavior on opacity { NumberAnimation { duration: 100 } }
+
     property int boxPadding: vpx(30)
     property int buttonTextSize: vpx(18)
     property int buttonHeight: vpx(50)
-    property color buttonGreen: "#3d4"
-    property color buttonRed: "#d43"
+    property color buttonGreen: "#3f4"
+    property color buttonRed: "#f43"
     property color buttonWhite: "#eee"
 
     Rectangle {
