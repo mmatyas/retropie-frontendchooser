@@ -2,6 +2,7 @@ import QtQuick 2.0
 
 
 Rectangle {
+    property alias text: descText.text
     signal accepted
 
     anchors.fill: parent
@@ -23,7 +24,6 @@ Rectangle {
 
         Text {
             id: descText
-            text: "ERROR: This program is for RetroPie, but RetroPie doesn't seem to be installed. The program will now close."
             color: "#111"
             font.pixelSize: vpx(20)
             wrapMode: Text.Wrap

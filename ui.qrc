@@ -8,8 +8,8 @@
         <file>ui/logo/pegasus.png</file>
         <file>ui/FrontendDelegate.qml</file>
         <file>ui/Title.qml</file>
-        <file>ui/RetropieMissing.qml</file>
-        <file>ui/InstallQuestion.qml</file>
         <file>ui/InstallLog.qml</file>
+        <file>ui/Message.qml</file>
+        <file>ui/Question.qml</file>
     </qresource>
 </RCC>
