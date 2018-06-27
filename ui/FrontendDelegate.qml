@@ -9,13 +9,13 @@ Item {
     property alias itemLogo: logo.source
 
     Rectangle {
-        property int borderWidth: autostarting ? vpx(6) : 0
+        property int borderWidth: autostarting ? vpx(4) : 0
 
         width: parent.width - vpx(10)
         height: parent.height - vpx(10)
         anchors.centerIn: parent
-        color: selected ? "#579" : "#556"
-        border.color: "#6ce"
+        color: selected ? "#569" : autostarting ? "#383848" : "#556"
+        border.color: autostarting ? "#e90" : "#112"
         border.width: borderWidth
 
         Behavior on borderWidth {
