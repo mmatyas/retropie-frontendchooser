@@ -3,6 +3,7 @@
 #include "Installer.h"
 #include "System.h"
 
+#include <QDebug>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -51,6 +52,9 @@ int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
+
+    qInfo() << "Frontend Chooser for RetroPie";
+    qInfo() << "by Mátyás Mustoha";
 
     const QList<QObject*> frontendModel(create_model());
     Installer installer;
