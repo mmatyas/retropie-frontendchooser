@@ -1,0 +1,36 @@
+language: cpp
+
+sudo: required
+dist: trusty
+
+branches:
+  only:
+  - master
+
+env:
+  global:
+  - TOOLS_URL=https://github.com/mmatyas/retropie-frontendchooser/releases/download/tools
+  - QT_VER=qt596
+
+install:
+  - sudo apt-get install -y
+      libudev-dev
+      libxi-dev
+  - pushd /tmp
+  - export TARGETS='x11-static rpi1-static rpi2-static'
+  - for target in ${TARGETS}; do
+      wget ${TOOLS_URL}/${QT_VER}_${target}.txz;
+    done
+  - wget ${TOOLS_URL}/rpi-toolchain_483.txz
+  - wget ${TOOLS_URL}/rpi-sysroot_jessie_2017-07-05.txz
+  - for f in *.txz; do sudo tar xJf ${f} -C /opt/; done
+  - sudo ln -s ${QT_VER}_x11-static /opt/${QT_VER}_x11-static_hosttools;
+  - popd
+
+script:
+  - for target in ${TARGETS}; do
+      mkdir build_${target} && cd build_${target} &&
+      /opt/${QT_VER}_${target}_hosttools/bin/qmake .. &&
+      make install INSTALL_ROOT=$PWD/../install_${target} &&
+      cd ..;
+    done
