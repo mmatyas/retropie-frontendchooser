@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     qInfo() << "Frontend Chooser for RetroPie";
-    qInfo() << "by Mátyás Mustoha";
+    qInfo() << "Created by Mátyás Mustoha";
 
     const QList<QObject*> frontendModel(create_model());
     Installer installer;
