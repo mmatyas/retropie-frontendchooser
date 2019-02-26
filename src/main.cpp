@@ -40,7 +40,7 @@ QList<QObject*> create_model()
             QStringLiteral("A graphical frontend for browsing your game library and launching all kinds of emulators from the same place."),
             QStringLiteral("pegasus.png"),
             QStringLiteral("pegasus-fe"),
-            QStringLiteral("/opt/retropie/supplementary/pegasus-fe/pegasus-fe")
+            QStringLiteral("pegasus-fe")
         ),
     };
 }
