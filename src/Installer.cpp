@@ -1,11 +1,12 @@
 #include "Installer.h"
 
+#include <QDir>
 #include <QFileInfo>
 
 
 Installer::Installer(QObject* parent)
     : QObject(parent)
-    , m_pkgman_path(QStringLiteral("/home/pi/RetroPie-Setup/retropie_packages.sh"))
+    , m_pkgman_path(QDir::homePath() + QStringLiteral("/RetroPie-Setup/retropie_packages.sh"))
     , m_task_running(false)
     , m_task_failed(false)
 {
