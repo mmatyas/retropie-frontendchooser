@@ -9,5 +9,5 @@ System::System(QObject *parent)
 
 void System::reboot() const
 {
-    QProcess::startDetached(QLatin1String("reboot"));
+    QProcess::startDetached(QLatin1String("reboot"), QStringList());
 }
