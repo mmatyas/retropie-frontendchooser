@@ -3,7 +3,7 @@ on: [push, workflow_dispatch]
 env:
   TOOLS_URL: https://github.com/mmatyas/pegasus-frontend/releases/download/alpha1
   QT_VER: qt5156
-  TARGETS: "x11-static rpi1-static rpi2-static rpi3-static rpi4-static"
+  TARGETS: "rpi1-static rpi2-static rpi3-static rpi4-static"
 
 jobs:
   build:
@@ -14,28 +14,6 @@ jobs:
           g++
           g++-arm-linux-gnueabihf
           g++-aarch64-linux-gnu
-          libasound-dev
-          libgl1-mesa-dev
-          libgstreamer-plugins-base1.0-dev
-          libpulse-dev
-          libudev-dev
-          libxcb-glx0-dev
-          libxcb-icccm4-dev
-          libxcb-image0-dev
-          libxcb-keysyms1-dev
-          libxcb-randr0-dev
-          libxcb-render-util0-dev
-          libxcb-shape0-dev
-          libxcb-sync-dev
-          libxcb-util-dev
-          libxcb-xfixes0-dev
-          libxcb-xinerama0-dev
-          libxi-dev
-          libxkbcommon-dev
-          libxkbcommon-x11-dev
-          libzstd-dev
-          ninja-build
-          xvfb
       - name: Get Qt
         working-directory: /tmp
         run: |
