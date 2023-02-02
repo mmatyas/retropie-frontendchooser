@@ -7,7 +7,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: APT deps
         run: sudo apt-get update && sudo apt-get install -y
@@ -47,10 +47,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build
         run: for target in ${TARGETS}; do
-          mkdir build_${target} && cd build_${target} &&
-          /opt/${QT_VER}_${target}_hosttools/bin/qmake .. &&
-          make install INSTALL_ROOT=$PWD/../install_${target} &&
-          cd ..;
+            mkdir build_${target} && cd build_${target} &&
+            /opt/${QT_VER}_${target}_hosttools/bin/qmake .. &&
+            make install INSTALL_ROOT=$PWD/../install_${target} &&
+            cd ..;
           done &&
           mkdir dist
       - name: Package
