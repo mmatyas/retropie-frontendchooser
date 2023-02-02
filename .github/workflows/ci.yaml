@@ -1,28 +1,46 @@
 on: [push, workflow_dispatch]
 
 env:
-  TOOLS_URL: https://github.com/mmatyas/retropie-frontendchooser/releases/download/tools
-  QT_VER: qt596
-  TARGETS: "x11-static rpi1-static rpi2-static"
+  TOOLS_URL: https://github.com/mmatyas/pegasus-frontend/releases/download/alpha1
+  QT_VER: qt5156
+  TARGETS: "x11-static rpi1-static rpi2-static rpi3-static rpi4-static"
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - name: APT deps
         run: sudo apt-get update && sudo apt-get install -y
-          libgl-dev
+          g++
+          libasound-dev
+          libgl1-mesa-dev
+          libgstreamer-plugins-base1.0-dev
+          libpulse-dev
           libudev-dev
-          libx11-xcb-dev
           libxcb-glx0-dev
+          libxcb-icccm4-dev
+          libxcb-image0-dev
+          libxcb-keysyms1-dev
+          libxcb-randr0-dev
+          libxcb-render-util0-dev
+          libxcb-shape0-dev
+          libxcb-sync-dev
+          libxcb-util-dev
+          libxcb-xfixes0-dev
+          libxcb-xinerama0-dev
           libxi-dev
+          libxkbcommon-dev
+          libxkbcommon-x11-dev
+          libzstd-dev
+          ninja-build
+          xvfb
       - name: Get Qt
         working-directory: /tmp
         run: |
-          for target in ${TARGETS}; do wget ${TOOLS_URL}/${QT_VER}_${target}.txz; done
-          wget ${TOOLS_URL}/rpi-toolchain_483.txz
-          wget ${TOOLS_URL}/rpi-sysroot_jessie_2017-07-05.txz
-          for f in *.txz; do sudo tar xJf ${f} -C /opt/; done
+          for target in ${TARGETS}; do wget ${TOOLS_URL}/${QT_VER}_${target}.tar.xz; done
+          wget ${TOOLS_URL}/rpi-sysroot_buster_brcm.tar.xz
+          wget ${TOOLS_URL}/rpi-sysroot_buster_mesa.tar.xz
+          for f in *.tar.xz; do sudo tar xJf ${f} -C /opt/; done
           sudo ln -s ${QT_VER}_x11-static /opt/${QT_VER}_x11-static_hosttools
       - uses: actions/checkout@v2
       - name: Build
